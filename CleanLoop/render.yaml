@@ -1,0 +1,16 @@
+# One-click deploy on Render (https://render.com): New + > Blueprint > pick your repo.
+services:
+  - type: web
+    name: cleanloop
+    runtime: node
+    plan: free
+    buildCommand: npm install --omit=dev
+    startCommand: node server/index.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: DEMO_MODE
+        value: "true"
+      - key: APP_SECRET
+        generateValue: true
+      - key: GEMINI_API_KEY
+        sync: false

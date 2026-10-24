@@ -1,0 +1,19 @@
+{
+  "name": "cleanloop",
+  "version": "1.0.0",
+  "description": "CleanLoop - AI-powered waste reporting, gig cleanup and recycling rewards platform",
+  "private": true,
+  "type": "module",
+  "main": "server/index.js",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "start": "node server/index.js",
+    "reset": "node server/index.js --reset-only",
+    "test": "node server/selftest.js",
+    "dev:client": "npm --prefix client run dev",
+    "build": "npm --prefix client install && npm --prefix client run build"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

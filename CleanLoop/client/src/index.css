@@ -1,0 +1,100 @@
+@import '@fontsource-variable/bricolage-grotesque';
+@import '@fontsource-variable/figtree';
+@import 'leaflet/dist/leaflet.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { -webkit-tap-highlight-color: transparent; }
+  body {
+    @apply bg-mist text-ink font-sans antialiased;
+    font-feature-settings: 'ss01', 'cv11';
+  }
+  h1, h2, h3, h4 { @apply font-display tracking-tight; font-variation-settings: 'wdth' 92; }
+  :focus-visible { outline: 2px solid #14A06B; outline-offset: 2px; border-radius: 8px; }
+  input, select, textarea { @apply text-ink; }
+  .dark-ui input, .dark-ui select, .dark-ui textarea { @apply text-night-text; }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-[15px] font-semibold
+      transition-[transform,background-color,box-shadow,opacity] duration-150 active:scale-[.97]
+      disabled:opacity-50 disabled:pointer-events-none select-none whitespace-nowrap;
+  }
+  .btn-primary { @apply btn bg-canopy text-white hover:bg-canopy-700 shadow-[0_8px_20px_-10px_rgba(14,94,74,.8)]; }
+  .btn-lime { @apply btn bg-lime text-canopy-900 hover:brightness-95 shadow-glow; }
+  .btn-ghost { @apply btn bg-white text-ink border border-line hover:border-canopy-300; }
+  .btn-soft { @apply btn bg-canopy-50 text-canopy-700 hover:bg-canopy-100; }
+  .btn-danger { @apply btn bg-coral text-white hover:bg-coral-deep; }
+  .btn-sm { @apply px-3.5 py-2 text-sm; }
+
+  .card { @apply bg-white rounded-xl2 border border-line/70 shadow-lift; }
+  .field {
+    @apply w-full rounded-xl border border-line bg-white px-4 py-3 text-[15px] outline-none
+      transition focus:border-leaf focus:ring-4 focus:ring-leaf/15 placeholder:text-ink-faint;
+  }
+  .label { @apply block text-sm font-semibold text-ink-soft mb-1.5; }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium border transition;
+  }
+
+  /* admin (night) */
+  .panel { @apply bg-night-panel border border-night-line rounded-xl2; }
+  .nfield {
+    @apply w-full rounded-xl border border-night-line bg-night-raised px-3.5 py-2.5 text-sm text-night-text outline-none
+      focus:border-lime/60 focus:ring-4 focus:ring-lime/10 placeholder:text-night-muted;
+  }
+  .nbtn { @apply btn btn-sm bg-night-raised text-night-text border border-night-line hover:border-lime/50; }
+  .nbtn-lime { @apply btn btn-sm bg-lime text-canopy-900 hover:brightness-95; }
+  .nbtn-danger { @apply btn btn-sm bg-coral/15 text-coral border border-coral/30 hover:bg-coral/25; }
+}
+
+@layer utilities {
+  .pb-safe { padding-bottom: max(env(safe-area-inset-bottom), 0px); }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { scrollbar-width: none; }
+  .text-balance { text-wrap: balance; }
+  .num { font-variant-numeric: tabular-nums; }
+}
+
+/* page enter (CSS so it can never get stuck invisible) */
+.page-enter { animation: pageIn .24s ease-out; }
+@keyframes pageIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* skeleton shimmer */
+.skeleton { position: relative; overflow: hidden; background: #e2ece7; border-radius: 12px; }
+.skeleton::after {
+  content: ''; position: absolute; inset: 0; transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.65), transparent);
+  animation: shimmer 1.3s infinite;
+}
+.dark-ui .skeleton { background: #14263F; }
+.dark-ui .skeleton::after { background: linear-gradient(90deg, transparent, rgba(255,255,255,.06), transparent); }
+@keyframes shimmer { 100% { transform: translateX(100%); } }
+
+/* leaflet tweaks */
+.leaflet-container { font-family: inherit; background: #dfe9e4; }
+.dark-ui .leaflet-container { background: #0b1626; }
+.leaflet-control-attribution { font-size: 10px !important; }
+.dark-ui .leaflet-control-attribution { background: rgba(8,19,34,.7) !important; color: #8EA3BF !important; }
+.dark-ui .leaflet-control-attribution a { color: #B6F04A !important; }
+.leaflet-popup-content-wrapper { border-radius: 14px; box-shadow: 0 12px 30px -12px rgba(0,0,0,.35); }
+.leaflet-popup-content { margin: 12px 14px; }
+.pin-pulse { position: relative; }
+.pin-pulse::before {
+  content: ''; position: absolute; inset: -6px; border-radius: 9999px; background: currentColor; opacity: .5;
+  animation: pulseRing 1.8s ease-out infinite;
+}
+@keyframes pulseRing { 0% { transform: scale(.6); opacity: .7; } 100% { transform: scale(2.2); opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: white; }
+}

@@ -1,0 +1,24 @@
+{
+  "accuracy": 88.3,
+  "perClass": {
+    "cardboard": 91.7,
+    "glass": 84.0,
+    "metal": 93.4,
+    "paper": 89.9,
+    "plastic": 83.3,
+    "trash": 90.0
+  },
+  "classes": [
+    "cardboard",
+    "glass",
+    "metal",
+    "paper",
+    "plastic",
+    "trash"
+  ],
+  "inputSize": 160,
+  "trainImages": 2150,
+  "valImages": 377,
+  "trainedAt": "2026-10-04 12:39",
+  "base": "MobileNet v1 (ImageNet)"
+}
